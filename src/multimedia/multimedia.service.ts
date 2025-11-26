@@ -1,24 +1,27 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class MultimediaService {
+  client: any;
   constructor(
     @Inject('MULTIMEDIA_SERVICE')
     private readonly multimediaClient: ClientProxy,
   ) {}
 
-  createMultimedia(id_receta: string, url_photo: string) {
-    return this.multimediaClient.send(
-      { cmd: 'create_multimedia' },
-      { id_receta, url_photo },
+  async createMultimedia(id_receta: string, url_photo: string) {
+    return firstValueFrom(
+      this.multimediaClient.send(
+        { cmd: 'create_multimedia' },
+        { id_receta, url_photo },
+      ),
     );
   }
 
-  findByRecipe(id_receta: string) {
-    return this.multimediaClient.send(
-      { cmd: 'find_multimedia_by_recipe' },
-      id_receta,
+  async findByRecipe(id_receta: string) {
+    return firstValueFrom(
+      this.client.send({ cmd: 'find_multimedia_by_recipe' }, id_receta),
     );
   }
 
@@ -41,6 +44,12 @@ export class MultimediaService {
     return this.multimediaClient.send(
       { cmd: 'delete_multimedia_by_recipe' },
       id_receta,
+    );
+  }
+
+  async obtainAll() {
+    return firstValueFrom(
+      this.multimediaClient.send({ cmd: 'obtain_all_multimedia' }, {}),
     );
   }
 }

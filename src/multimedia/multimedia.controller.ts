@@ -23,6 +23,11 @@ export class MultimediaController {
     );
   }
 
+  @Get()
+  obtainAll() {
+    return this.multimediaService.obtainAll();
+  }
+
   @Get('recipe/:id')
   findByRecipe(@Param('id') id: string) {
     return this.multimediaService.findByRecipe(id);

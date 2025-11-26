@@ -23,8 +23,8 @@ import { MultimediaController } from './multimedia.controller';
       },
     ]),
   ],
-  controllers: [MultimediaController],
   providers: [MultimediaService],
   exports: [MultimediaService],
+  controllers: [MultimediaController],
 })
 export class MultimediaModule {}
