@@ -6,4 +6,6 @@ export default registerAs('appconfig', () => ({
   jwt_secret: process.env.JWT_SECRET || 'supersecret',
   recipe_queue: process.env.RECIPE_QUEUE || 'recipes_queue',
   user_queue: process.env.USER_QUEUE || 'users_queue',
+  social_queue: process.env.SOCIAL_QUEUE || 'social_queue',
+  tags_queue: process.env.TAGS_QUEUE || 'tags_queue',
 }));
